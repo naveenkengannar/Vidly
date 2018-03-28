@@ -1,4 +1,5 @@
 ﻿@model Vidly.Models.Customer
+
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +10,9 @@
     <li>Membership Type: @Model.MembershipType.Name</li>
     @if (Model.BirthDate != null)
     {
-        <li>Birth date: @Model.BirthDate</li>
+        <li>
+            Birth date: @(((DateTime)Model.BirthDate).ToShortDateString())
+        </li>
     }
 </ul>
 
