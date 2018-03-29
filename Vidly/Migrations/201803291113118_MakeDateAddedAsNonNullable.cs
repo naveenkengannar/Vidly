@@ -3,16 +3,16 @@ namespace Vidly.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddNameToMembershipType : DbMigration
+    public partial class MakeDateAddedAsNonNullable : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.MembershipTypes", "ModelName", c => c.String());
+            AlterColumn("dbo.Movies", "DateAdded", c => c.DateTime(nullable: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.MembershipTypes", "ModelName");
+            AlterColumn("dbo.Movies", "DateAdded", c => c.DateTime());
         }
     }
 }

@@ -57,7 +57,7 @@ namespace Vidly.Controllers
         //    if (!pageIndex.HasValue)
         //        pageIndex = 1;
         //    if(String.IsNullOrWhiteSpace(sortBy))
-        //        sortBy = "Name";
+        //        sortBy = "ModelName";
 
         //    //return Content(string.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
         //    return View(_movies);
@@ -83,18 +83,27 @@ namespace Vidly.Controllers
             var genres = _context.Genres.ToList();
             var viewModel = new MovieFormViewModel
             {
-                Name = "New Movie",
-                Genre = genres
+                Genres = genres
                
             };
             return View("MovieForm", viewModel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel(movie)
+                {
+                    Genres = _context.Genres.ToList()
+                };
+                return View("MovieForm", viewModel);
+            }
             if (movie.Id == 0)
             {
+                movie.DateAdded=DateTime.Now;
                 _context.Movies.Add(movie);
             }
             else
@@ -119,10 +128,10 @@ namespace Vidly.Controllers
             if (movie == null)
                 return HttpNotFound();
 
-            var viewModel = new MovieFormViewModel
+            var viewModel = new MovieFormViewModel(movie)
+
             {
-                Movie = movie,
-                Genre = _context.Genres.ToList()
+                Genres = _context.Genres.ToList()
             };
             return View("MovieForm",viewModel);
         }
