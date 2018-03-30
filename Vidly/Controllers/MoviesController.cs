@@ -63,13 +63,16 @@ namespace Vidly.Controllers
         //    return View(_movies);
         //}
 
+            
         public ActionResult Index()
         {
             //var movies = _context.Movies
             //    .Include(m=>m.Genre)
             //    .ToList();
             //return View(movies);
-            return View();
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View("MovieList");
+            return View("MovieListReadOnly");
         }
 
         [Route("movies/released/{year}/{month:regex(\\d{2}):range(1,12)}")]
@@ -78,7 +81,7 @@ namespace Vidly.Controllers
             return Content(year + "/" + month);
         }
 
-
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var genres = _context.Genres.ToList();
