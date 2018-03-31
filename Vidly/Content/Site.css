@@ -26,10 +26,15 @@ textarea {
 .field-validation-error {
     color: red;
 }
-.input-validation-error {
+.input-validation-error ,input.error {
     border: red 2px solid;
 }
 
 .validation-summary-errors {
     color: red;
 }
+
+label.error{
+   color:red;
+}
+
