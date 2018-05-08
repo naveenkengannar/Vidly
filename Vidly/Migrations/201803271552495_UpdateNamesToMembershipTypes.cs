@@ -7,9 +7,9 @@ namespace Vidly.Migrations
     {
         public override void Up()
         {
-            Sql("UPDATE MEMBERSHIPTYPES SET NAME='Pay as You Go' WHERE ID=1");
-            Sql("UPDATE MEMBERSHIPTYPES SET NAME='Monthly' WHERE ID=2");
-            Sql("UPDATE MEMBERSHIPTYPES SET NAME='Haly Yearly' WHERE ID=3");
+            //Sql("UPDATE MEMBERSHIPTYPES SET NAME='Pay as You Go' WHERE ID=1");
+            //Sql("UPDATE MEMBERSHIPTYPES SET NAME='Monthly' WHERE ID=2");
+            //Sql("UPDATE MEMBERSHIPTYPES SET NAME='Haly Yearly' WHERE ID=3");
         }
         
         public override void Down()

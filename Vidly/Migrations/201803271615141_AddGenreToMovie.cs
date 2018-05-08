@@ -20,7 +20,7 @@ namespace Vidly.Migrations
             AddColumn("dbo.Movies", "DateAdded", c => c.DateTime(nullable: false));
             AddColumn("dbo.Movies", "NumberInStock", c => c.Int(nullable: false));
             AddColumn("dbo.Movies", "GenreId", c => c.Byte(nullable: false));
-            AlterColumn("dbo.Movies", "ModelName", c => c.String(nullable: false));
+            AlterColumn("dbo.Movies", "Name", c => c.String(nullable: false));
             CreateIndex("dbo.Movies", "GenreId");
             AddForeignKey("dbo.Movies", "GenreId", "dbo.Genres", "Id", cascadeDelete: true);
         }
@@ -29,7 +29,7 @@ namespace Vidly.Migrations
         {
             DropForeignKey("dbo.Movies", "GenreId", "dbo.Genres");
             DropIndex("dbo.Movies", new[] { "GenreId" });
-            AlterColumn("dbo.Movies", "ModelName", c => c.String());
+            AlterColumn("dbo.Movies", "Name", c => c.String());
             DropColumn("dbo.Movies", "GenreId");
             DropColumn("dbo.Movies", "NumberInStock");
             DropColumn("dbo.Movies", "DateAdded");
